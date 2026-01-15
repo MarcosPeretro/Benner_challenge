@@ -46,7 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeradorTxt\Models.cs" />
+    <Compile Include="GeradorTxt\GeradorArquivoV2.cs" />
+    <Compile Include="GeradorTxt\Models\CategoriaItem.cs" />
+    <Compile Include="GeradorTxt\Models\Documento.cs" />
+    <Compile Include="GeradorTxt\Models\Empresa.cs" />
+    <Compile Include="GeradorTxt\Models\ItemDocumento.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeradorTxt\GeradorArquivoBase.cs" />
@@ -54,6 +58,7 @@
     <Compile Include="GeradorTxt\MainConsole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

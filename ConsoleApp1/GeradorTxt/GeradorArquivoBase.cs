@@ -1,3 +1,4 @@
+using ConsoleApp1.GeradorTxt.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +14,7 @@ namespace GeradorTxt
     /// </summary>
     public class GeradorArquivoBase
     {
-        public void Gerar(List<Empresa> empresas, string outputPath)
+        public virtual void Gerar(List<Empresa> empresas, string outputPath)
         {
             var sb = new StringBuilder();
             foreach (var emp in empresas)
@@ -55,7 +56,7 @@ namespace GeradorTxt
               .Append(ToMoney(doc.Valor)).AppendLine();
         }
 
-        protected void EscreverTipo02(StringBuilder sb, ItemDocumento item)
+        protected virtual void EscreverTipo02(StringBuilder sb, ItemDocumento item)
         {
             // 02|DESCRICAOITEM|VALORITEM
             sb.Append("02").Append("|")

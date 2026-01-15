@@ -59,7 +59,7 @@ namespace GeradorTxt
                         break;
 
                     case "3":
-                        Console.Write("Gerar arquivo");
+                        Console.Write("Gerar arquivo\n");
                         try
                         {
                             var gerador = new GeradorArquivoBase();

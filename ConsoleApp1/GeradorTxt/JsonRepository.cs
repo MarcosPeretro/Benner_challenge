@@ -1,3 +1,4 @@
+using ConsoleApp1.GeradorTxt.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
