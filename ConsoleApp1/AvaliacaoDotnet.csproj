@@ -49,6 +49,7 @@
     <Compile Include="GeradorTxt\Controllers\GeradorArquivoFactory.cs" />
     <Compile Include="GeradorTxt\Controllers\GeradorArquivoV2.cs" />
     <Compile Include="GeradorTxt\Controllers\IGeradorArquivo.cs" />
+    <Compile Include="GeradorTxt\Enum\Enum.cs" />
     <Compile Include="GeradorTxt\Models\CategoriaItem.cs" />
     <Compile Include="GeradorTxt\Models\Documento.cs" />
     <Compile Include="GeradorTxt\Models\Empresa.cs" />

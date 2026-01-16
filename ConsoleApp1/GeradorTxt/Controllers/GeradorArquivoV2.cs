@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.GeradorTxt.Models;
+﻿using ConsoleApp1.GeradorTxt.Enum;
+using ConsoleApp1.GeradorTxt.Models;
 using GeradorTxt;
 using System;
 using System.Collections.Generic;
@@ -11,42 +12,44 @@ namespace ConsoleApp1.GeradorTxt
 {
     internal class GeradorArquivoV2 : GeradorArquivoBase
     {
-        public override void Gerar(List<Empresa> empresas, string outputPath)
+        public GeradorArquivoV2() : base()
         {
-            var sb = new StringBuilder();
-            foreach (var emp in empresas)
-            {
-                EscreverTipo00(sb, emp);
-                foreach (var doc in emp.Documentos)
-                {
-                    EscreverTipo01(sb, doc);
-                    foreach (var item in doc.Itens)
-                    {
-                        EscreverTipo02(sb, item);
-                        foreach (var categoria in item.Categorias)
-                        {
-                            EscreverTipo03(sb, categoria);
-                        }
-                    }
-                }
-            }
-            File.WriteAllText(outputPath, sb.ToString(), Encoding.UTF8);
+            qtdLinhas.Add(TipoLinha.Tipo03, 0);
         }
-        protected override void EscreverTipo02(StringBuilder sb, ItemDocumento item)
+
+        protected override void ProcessaItem(StringBuilder sb, ItemDocumento item)
         {
-            // 02|NUMEROITEM|DESCRICAOITEM|VALORITEM
-            sb.Append("02").Append("|")
-              .Append(item.NumeroItem).Append("|")
-              .Append(item.Descricao).Append("|")
-              .Append(ToMoney(item.Valor)).AppendLine();
+
+            base.ProcessaItem(sb, item);
+
+            foreach (var categoria in item.Categorias)
+            {
+                EscreverTipo03(sb,categoria);
+                qtdLinhas[TipoLinha.Tipo03]++;
+            }
+        }
+
+        protected override void EscreveCamposTipo02(StringBuilder sb, ItemDocumento item)
+        {
+            sb.Append(item.NumeroItem)
+               .Append("|");
+            base.EscreveCamposTipo02(sb, item);
         }
 
         protected void EscreverTipo03(StringBuilder sb, CategoriaItem cat)
         {
             // 03|NUMEROCATEGORIA|DESCRICAOCATEGORIA
-            sb.Append("03").Append("|")
+            sb.Append("03|")
               .Append(cat.NumeroCategoria).Append("|")
               .Append(cat.DescricaoCategoria).AppendLine();
+
+        }
+
+        protected override void EscreverTipo09(StringBuilder sb)
+        {
+            base.EscreverTipo09(sb);
+
+            sb.Append("09|03|").Append(qtdLinhas[TipoLinha.Tipo03]).AppendLine();
         }
     }
 }

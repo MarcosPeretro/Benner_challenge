@@ -75,7 +75,7 @@ namespace GeradorTxt
 
                             var fullPath = Path.Combine(_outputDir, fileName);
 
-                            gerador.Gerar(dados, fullPath);
+                            gerador.GeraTxt(dados, fullPath);
 
                             Console.WriteLine("Arquivo gerado em: " + fullPath);
                         }

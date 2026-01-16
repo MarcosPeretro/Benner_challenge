@@ -9,6 +9,6 @@ namespace ConsoleApp1.GeradorTxt
 {
     public interface IGeradorArquivo
     {
-        void Gerar(List<Empresa> empresas, string outputPath);
+        void GeraTxt(List<Empresa> empresas, string outputPath);
     }
 }
