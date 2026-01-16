@@ -1,4 +1,4 @@
-﻿using GeradorTxt;
+﻿using ConsoleApp1.GeradorTxt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.GeradorTxt
 {
-    internal class GeradorArquivoV2 : GeradorArquivoBase
+    public interface IGeradorArquivo
     {
-
+        void Gerar(List<Empresa> empresas, string outputPath);
     }
 }

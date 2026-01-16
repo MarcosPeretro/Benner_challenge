@@ -1,3 +1,5 @@
+using ConsoleApp1.GeradorTxt;
+using ConsoleApp1.GeradorTxt.Controllers;
 using System;
 using System.IO;
 
@@ -59,10 +61,13 @@ namespace GeradorTxt
                         break;
 
                     case "3":
-                        Console.Write("Gerar arquivo\n");
+                        Console.WriteLine("Gerar leiaute 1 ou 2?");
+                        //trycatch
+                        int versao = int.Parse(Console.ReadLine());
+
                         try
                         {
-                            var gerador = new GeradorArquivoBase();
+                            var gerador = GeradorArquivoFactory.Criar(versao);
 
                             var dados = JsonRepository.LoadEmpresas(_jsonPath);
 

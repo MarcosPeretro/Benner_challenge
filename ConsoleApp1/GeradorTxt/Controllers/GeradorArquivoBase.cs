@@ -1,3 +1,4 @@
+using ConsoleApp1.GeradorTxt;
 using ConsoleApp1.GeradorTxt.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace GeradorTxt
     /// IMPORTANTE: métodos NÃO marcados como virtual de propósito.
     /// O candidato deve decidir onde permitir override para suportar versões futuras.
     /// </summary>
-    public class GeradorArquivoBase
+    public class GeradorArquivoBase : IGeradorArquivo
     {
         public virtual void Gerar(List<Empresa> empresas, string outputPath)
         {

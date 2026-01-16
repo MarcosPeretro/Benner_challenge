@@ -8,7 +8,7 @@ namespace ConsoleApp1.GeradorTxt.Models
 {
     public class CategoriaItem
     {
-        public int NumeroCategoriaItem { get; set; }
-        public string Descricao { get; set; }
+        public int NumeroCategoria { get; set; }
+        public string DescricaoCategoria { get; set; }
     }
 }
