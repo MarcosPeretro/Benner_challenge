@@ -33,26 +33,30 @@ namespace GeradorTxt
             var sb = new StringBuilder();
             foreach (var emp in empresas)
             {
-                EscreverTipo00(sb, emp);
-                qtdLinhas[TipoLinha.Tipo00]++;
-
-                foreach (var doc in emp.Documentos)
-                {
-                    ProcessaDocumento(sb, doc);
-                }
+                ProcessaEmpresa(sb, emp);
             }
 
-            EscreverTipo09(sb);
+            EscreveTipo09(sb);
             ExibeQuantidadeTotalLinhas(sb);
             File.WriteAllText(outputPath, sb.ToString(), Encoding.UTF8);
         }
         
+        protected virtual void ProcessaEmpresa(StringBuilder sb, Empresa emp)
+        {
+
+            EscreveTipo00(sb, emp);
+            qtdLinhas[TipoLinha.Tipo00]++;
+            foreach (var doc in emp.Documentos)
+            {
+                ProcessaDocumento(sb, doc);
+            }
+        }
         protected virtual void ProcessaDocumento(StringBuilder sb, Documento doc)
         {
             var valorItens = doc.Itens.Sum(i => i.Valor);
             ValidaValorTotal(doc.Valor, valorItens);
 
-            EscreverTipo01(sb, doc);
+            EscreveTipo01(sb, doc);
             qtdLinhas[TipoLinha.Tipo01]++;
 
             foreach (var item in doc.Itens)
@@ -63,7 +67,7 @@ namespace GeradorTxt
 
         protected virtual void ProcessaItem(StringBuilder sb, ItemDocumento item)
         {
-            EscreverTipo02(sb, item);
+            EscreveTipo02(sb, item);
             qtdLinhas[TipoLinha.Tipo02]++;
         }
 
@@ -73,7 +77,7 @@ namespace GeradorTxt
             return val.ToString("0.00", CultureInfo.InvariantCulture);
         }
 
-        protected void EscreverTipo00(StringBuilder sb, Empresa emp)
+        protected void EscreveTipo00(StringBuilder sb, Empresa emp)
         {
             // 00|CNPJEMPRESA|NOMEEMPRESA|TELEFONE
             sb.Append("00|")
@@ -82,7 +86,7 @@ namespace GeradorTxt
               .Append(emp.Telefone).AppendLine();
         }
 
-        protected decimal EscreverTipo01(StringBuilder sb, Documento doc)
+        protected decimal EscreveTipo01(StringBuilder sb, Documento doc)
         {
             // 01|MODELODOCUMENTO|NUMERODOCUMENTO|VALORDOCUMENTO
             sb.Append("01|")
@@ -92,7 +96,7 @@ namespace GeradorTxt
             return doc.Valor;
         }
 
-        protected decimal EscreverTipo02(StringBuilder sb, ItemDocumento item)
+        protected decimal EscreveTipo02(StringBuilder sb, ItemDocumento item)
         {
             // 02|DESCRICAOITEM|VALORITEM
             sb.Append("02|");
@@ -117,7 +121,7 @@ namespace GeradorTxt
             }
         }
 
-        protected virtual void EscreverTipo09(StringBuilder sb)
+        protected virtual void EscreveTipo09(StringBuilder sb)
         {
             /* 
              09|00|QUANTIDADE_LINHAS_DO_TIPO_00

@@ -24,7 +24,7 @@ namespace ConsoleApp1.GeradorTxt
 
             foreach (var categoria in item.Categorias)
             {
-                EscreverTipo03(sb,categoria);
+                EscreveTipo03(sb,categoria);
                 qtdLinhas[TipoLinha.Tipo03]++;
             }
         }
@@ -36,7 +36,7 @@ namespace ConsoleApp1.GeradorTxt
             base.EscreveCamposTipo02(sb, item);
         }
 
-        protected void EscreverTipo03(StringBuilder sb, CategoriaItem cat)
+        protected void EscreveTipo03(StringBuilder sb, CategoriaItem cat)
         {
             // 03|NUMEROCATEGORIA|DESCRICAOCATEGORIA
             sb.Append("03|")
@@ -45,9 +45,9 @@ namespace ConsoleApp1.GeradorTxt
 
         }
 
-        protected override void EscreverTipo09(StringBuilder sb)
+        protected override void EscreveTipo09(StringBuilder sb)
         {
-            base.EscreverTipo09(sb);
+            base.EscreveTipo09(sb);
 
             sb.Append("09|03|").Append(qtdLinhas[TipoLinha.Tipo03]).AppendLine();
         }
