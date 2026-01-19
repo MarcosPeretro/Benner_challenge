@@ -1,5 +1,5 @@
 using ConsoleApp1.GeradorTxt;
-using ConsoleApp1.GeradorTxt.Controllers;
+using ConsoleApp1.GeradorTxt.Services;
 using System;
 using System.IO;
 
@@ -10,7 +10,7 @@ namespace GeradorTxt
     /// </summary>
     public static class MainConsole
     {
-        private static string _jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "base-dados.json");
+        private static string _jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "base-dados.json"); 
         private static string _outputDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out");
 
         public static void Run()
@@ -20,7 +20,7 @@ namespace GeradorTxt
             {
                 Console.WriteLine();
                 Console.WriteLine("Menu");
-                Console.WriteLine("1. Configurar arquivo .json (base de dados)");
+                Console.WriteLine("1. Configurar arquivo .json (base de dados, default: leiaute 1)");
                 Console.WriteLine("2. Configurar diretório de output");
                 Console.WriteLine("3. Gerar arquivo");
                 Console.WriteLine("0. Sair");
@@ -62,8 +62,18 @@ namespace GeradorTxt
 
                     case "3":
                         Console.WriteLine("Gerar leiaute 1 ou 2?");
-                        //trycatch
-                        int versao = int.Parse(Console.ReadLine());
+                        string input = Console.ReadLine();
+
+                        if (!int.TryParse(input, out int versao))
+                        {
+                            Console.WriteLine("Entrada não é um número");
+                            continue;
+                        }
+                        if (versao != 1 && versao != 2)
+                        {
+                            Console.WriteLine("Número inválido, Escolha 1 ou 2");
+                            continue;
+                        }
 
                         try
                         {
@@ -71,7 +81,7 @@ namespace GeradorTxt
 
                             var dados = JsonRepository.LoadEmpresas(_jsonPath);
 
-                            var fileName = $"saida_leiaute_versão 01_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+                            var fileName = $"saida_leiaute_versão 0{versao}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
 
                             var fullPath = Path.Combine(_outputDir, fileName);
 
@@ -82,6 +92,7 @@ namespace GeradorTxt
                         catch (Exception ex)
                         {
                             Console.WriteLine("Erro ao gerar arquivo: " + ex.Message);
+                            
                         }
                         break;
 

@@ -45,7 +45,7 @@ namespace GeradorTxt
         {
 
             EscreveTipo00(sb, emp);
-            qtdLinhas[TipoLinha.Tipo00]++;
+            ContaLinha(TipoLinha.Tipo00);
             foreach (var doc in emp.Documentos)
             {
                 ProcessaDocumento(sb, doc);
@@ -57,7 +57,7 @@ namespace GeradorTxt
             ValidaValorTotal(doc.Valor, valorItens);
 
             EscreveTipo01(sb, doc);
-            qtdLinhas[TipoLinha.Tipo01]++;
+            ContaLinha(TipoLinha.Tipo01);
 
             foreach (var item in doc.Itens)
             {
@@ -68,7 +68,7 @@ namespace GeradorTxt
         protected virtual void ProcessaItem(StringBuilder sb, ItemDocumento item)
         {
             EscreveTipo02(sb, item);
-            qtdLinhas[TipoLinha.Tipo02]++;
+            ContaLinha(TipoLinha.Tipo02);
         }
 
         protected string ToMoney(decimal val)
@@ -136,7 +136,13 @@ namespace GeradorTxt
         protected void ExibeQuantidadeTotalLinhas(StringBuilder sb)
         {
             // 99|QUANTIDADE_LINHAS_NO_ARQUIVO
-            sb.Append("99|").Append(qtdLinhas.Values.Sum() + qtdLinhas.Count); // não sei se é necessario adicionar os contadores de linhas na contagem de linhas
+            sb.Append("99|").Append(qtdLinhas.Values.Sum() + qtdLinhas.Count); 
+            // não sei se é necessario adicionar os contadores de linhas na contagem de linhas
+        }
+
+        protected void ContaLinha(TipoLinha tipo)
+        {
+            qtdLinhas[tipo]++;
         }
     }
 }

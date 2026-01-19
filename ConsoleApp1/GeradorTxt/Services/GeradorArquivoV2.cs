@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.GeradorTxt
 {
-    internal class GeradorArquivoV2 : GeradorArquivoBase
+    public class GeradorArquivoV2 : GeradorArquivoBase
     {
         public GeradorArquivoV2() : base()
         {
@@ -25,14 +25,15 @@ namespace ConsoleApp1.GeradorTxt
             foreach (var categoria in item.Categorias)
             {
                 EscreveTipo03(sb,categoria);
-                qtdLinhas[TipoLinha.Tipo03]++;
+                ContaLinha(TipoLinha.Tipo03);
             }
         }
 
         protected override void EscreveCamposTipo02(StringBuilder sb, ItemDocumento item)
         {
             sb.Append(item.NumeroItem)
-               .Append("|");
+              .Append("|");
+
             base.EscreveCamposTipo02(sb, item);
         }
 
